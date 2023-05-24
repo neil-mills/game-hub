@@ -7,18 +7,22 @@ import GameCardContainer from './GameCardContainer';
 const skeletons = Array.from({ length: 6 }).map((_item, i) => i);
 import { Game } from '../types/Game.type';
 import { Genre } from '../types/Genre.type';
+import { Platform } from '../types/Platform.type';
 
 interface Props {
   selectedGenre: Genre | null;
+  selectedPlatform: Platform | null;
 }
-const GameGrid = ({ selectedGenre }: Props) => {
+const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
   const {
     data: games,
     error,
     isLoading,
-  } = useData<Game>('/games', { params: { genres: selectedGenre?.id } }, [
-    selectedGenre?.id,
-  ]);
+  } = useData<Game>(
+    '/games',
+    { params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id } },
+    [selectedGenre?.id, selectedPlatform?.id]
+  );
   return (
     <>
       {error && <Text>{error}</Text>}
