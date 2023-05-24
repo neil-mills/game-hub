@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
 import apiClient from '../services/api-client';
-import { AxiosError } from 'axios';
 import { SimpleGrid, Text } from '@chakra-ui/react';
-import useGames from '../hooks/useGames';
+import useData from '../hooks/useData';
 import GameCard from './GameCard';
 import GameCardSkeleton from './GameCardSkeleton';
 import GameCardContainer from './GameCardContainer';
 const skeletons = Array.from({ length: 6 }).map((_item, i) => i);
+import { Game } from '../types/Game.type';
 
 const GameGrid = () => {
-  const { games, error, isLoading } = useGames();
+  const { data: games, error, isLoading } = useData<Game>('/games');
   return (
     <>
       {error && <Text>{error}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
-        spacing={10}
+        spacing={3}
         padding="10px">
         {isLoading &&
           skeletons.map((skeleton) => (
