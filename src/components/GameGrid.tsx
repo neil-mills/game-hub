@@ -6,9 +6,19 @@ import GameCardSkeleton from './GameCardSkeleton';
 import GameCardContainer from './GameCardContainer';
 const skeletons = Array.from({ length: 6 }).map((_item, i) => i);
 import { Game } from '../types/Game.type';
+import { Genre } from '../types/Genre.type';
 
-const GameGrid = () => {
-  const { data: games, error, isLoading } = useData<Game>('/games');
+interface Props {
+  selectedGenre: Genre | null;
+}
+const GameGrid = ({ selectedGenre }: Props) => {
+  const {
+    data: games,
+    error,
+    isLoading,
+  } = useData<Game>('/games', { params: { genres: selectedGenre?.id } }, [
+    selectedGenre?.id,
+  ]);
   return (
     <>
       {error && <Text>{error}</Text>}
