@@ -8,6 +8,7 @@ import { Platform } from './types/Platform.type';
 import { GameQuery } from './types/GameQuery.type';
 import PlatformSelector from './components/PlatformSelector';
 import SortSelector from './components/SortSelector';
+import GameHeading from './components/GameHeading';
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
@@ -23,7 +24,7 @@ function App() {
         lg: '200px 1fr',
       }}>
       <GridItem area="nav">
-        <NavBar />
+        <NavBar query={gameQuery} onSubmitSearch={setGameQuery} />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5} paddingLeft={2} marginBottom={5}>
@@ -31,15 +32,18 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <Flex paddingLeft={2} marginBottom={5}>
-          <Box marginRight={5}>
-            <PlatformSelector
-              query={gameQuery}
-              onSelectPlatform={setGameQuery}
-            />
-          </Box>
-          <SortSelector query={gameQuery} onSelectOrder={setGameQuery} />
-        </Flex>
+        <Box paddingLeft={2}>
+          <GameHeading query={gameQuery} />
+          <Flex marginBottom={5}>
+            <Box marginRight={5}>
+              <PlatformSelector
+                query={gameQuery}
+                onSelectPlatform={setGameQuery}
+              />
+            </Box>
+            <SortSelector query={gameQuery} onSelectOrder={setGameQuery} />
+          </Flex>
+        </Box>
         <GameGrid query={gameQuery} />
       </GridItem>
     </Grid>
