@@ -27,7 +27,7 @@ function App() {
         <NavBar query={gameQuery} onSubmitSearch={setGameQuery} />
       </GridItem>
       <Show above="lg">
-        <GridItem area="aside" paddingX={5} paddingLeft={2} marginBottom={5}>
+        <GridItem area="aside" paddingX={5} paddingLeft={5} marginBottom={5}>
           <GenreList query={gameQuery} onSelectGenre={setGameQuery} />
         </GridItem>
       </Show>
