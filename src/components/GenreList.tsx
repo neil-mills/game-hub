@@ -3,23 +3,20 @@ import {
   Image,
   List,
   ListItem,
-  Spinner,
   Button,
   Heading,
 } from '@chakra-ui/react';
-import useData from '../hooks/useData';
 import getCroppedImageUrl from '../services/image-url';
-import { Genre } from '../types/Genre.type';
 import { GameQuery } from '../types/GameQuery.type';
+import genres from '../data/genres';
+import { Genre } from '../types/Genre.type';
 
 interface Props {
   onSelectGenre: (query: GameQuery) => void;
   query: GameQuery;
 }
 const GenreList = ({ onSelectGenre, query }: Props) => {
-  const { data, error, isLoading } = useData<Genre>('/genres');
-  if (error) return null;
-  if (isLoading) return <Spinner />;
+  const data: Genre[] = genres.results;
   return (
     <>
       <Heading fontSize="2xl" marginBottom={3}>
