@@ -23,14 +23,16 @@ const GameGrid = ({ query }: Props) => {
         genres: query?.genre?.id,
         platforms: query?.platform?.id,
         ordering: query?.ordering,
+        search: query?.search,
       },
     },
-    [query?.genre?.id, query?.platform?.id, query?.ordering]
+    [query?.genre?.id, query?.platform?.id, query?.ordering, query?.search]
   );
   console.log({
     genres: query?.genre?.id,
     platforms: query?.platform?.id,
     ordering: query?.ordering,
+    search: query?.search,
   });
   return (
     <>
