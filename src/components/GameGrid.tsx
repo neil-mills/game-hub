@@ -6,23 +6,32 @@ import GameCardSkeleton from './GameCardSkeleton';
 import GameCardContainer from './GameCardContainer';
 const skeletons = Array.from({ length: 6 }).map((_item, i) => i);
 import { Game } from '../types/Game.type';
-import { Genre } from '../types/Genre.type';
-import { Platform } from '../types/Platform.type';
+import { GameQuery } from '../types/GameQuery.type';
 
 interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  query: GameQuery;
 }
-const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
+const GameGrid = ({ query }: Props) => {
   const {
     data: games,
     error,
     isLoading,
   } = useData<Game>(
     '/games',
-    { params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id } },
-    [selectedGenre?.id, selectedPlatform?.id]
+    {
+      params: {
+        genres: query?.genre?.id,
+        platforms: query?.platform?.id,
+        ordering: query?.ordering,
+      },
+    },
+    [query?.genre?.id, query?.platform?.id, query?.ordering]
   );
+  console.log({
+    genres: query?.genre?.id,
+    platforms: query?.platform?.id,
+    ordering: query?.ordering,
+  });
   return (
     <>
       {error && <Text>{error}</Text>}
