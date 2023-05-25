@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, GridItem, HStack, Show } from '@chakra-ui/react';
+import { Grid, GridItem, Flex, Show, Box } from '@chakra-ui/react';
 import NavBar from './components/NavBar';
 import GameGrid from './components/GameGrid';
 import GenreList from './components/GenreList';
@@ -31,10 +31,15 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <HStack spacing={5}>
-          <PlatformSelector query={gameQuery} onSelectPlatform={setGameQuery} />
+        <Flex paddingLeft={2} marginBottom={5}>
+          <Box marginRight={5}>
+            <PlatformSelector
+              query={gameQuery}
+              onSelectPlatform={setGameQuery}
+            />
+          </Box>
           <SortSelector query={gameQuery} onSelectOrder={setGameQuery} />
-        </HStack>
+        </Flex>
         <GameGrid query={gameQuery} />
       </GridItem>
     </Grid>
